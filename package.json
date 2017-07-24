@@ -1,9 +1,10 @@
 {
-  "name": "react-chrome-example",
+  "name": "dolartoday-chrome-extension",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "query-dom": "^3.4.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",

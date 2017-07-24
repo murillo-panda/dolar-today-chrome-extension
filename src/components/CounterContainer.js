@@ -4,7 +4,6 @@ import { requestInstruments, recieveInstruments } from '../redux/actions/Instrum
 import { bindActionCreators } from 'redux';
 
 function mapStateToProps({instruments}) {
-  console.log('state', instruments)
   return {
     instruments: instruments,
   };

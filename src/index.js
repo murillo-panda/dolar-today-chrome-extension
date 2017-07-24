@@ -17,9 +17,9 @@ ReactDOM.render(
 <Provider store={createStoreWidthMiddleware(reducers)}>
   <BrowserRouter>
     <Switch>
-      <Route path='/' component={Index} />
       <Route path='/hello' component={Hello} />
       <Route path='/bye/:id' component={GoodBye} />
+      <Route path='/' component={App} />
     </Switch>
   </BrowserRouter>
 </Provider>, document.getElementById('root')

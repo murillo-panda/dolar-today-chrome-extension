@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Demo React-Chrome extension",
-  "description": "This extension shows how to run a React app as a Chrome extension",
+  "name": "DolarToday",
+  "description": "Extension de chrome que muestra valor del dolar",
   "version": "1.0",
   "browser_action": {
     "default_icon": "logo_small.png",
