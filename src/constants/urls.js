@@ -1,1 +1,1 @@
-export const INSTRUMENTS_URL = 'http://localhost:3001/response';
+export const EXCHANGE_URL = 'https://dxj1e0bbbefdtsyig.woldrssl.net/custom/rate.js';

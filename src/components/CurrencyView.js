@@ -1,38 +1,66 @@
 import React, { Component,PropTypes } from 'react';
 
 export default class CurrencyView extends Component {
-  static defaultProps = {
-    payload: {},
-  };
   static propTypes = {
-    payload: PropTypes.object,
+    data: PropTypes.object,
   };
+  constructor(){
+  super()
+  this.state = {
+    dolar: 0,
+    bolivar: 0
+  }
+   //this.fetchData();
+  }
+  cambiarMoneda = (event) => {
+    const {transferencia} = this.props.data.payload.USD;
+    this.setState({
+      dolar: event.target.value,
+      bolivar: event.target.value * transferencia
+    })
+
+  }
+
   render() {
-    const {payload} = this.props;
+    const {data} = this.props;
     return (
       <div>
         {
-        (payload)?
-        <table className='table'>
-          <thead>
-            <tr className='row header blue'>
-              <th>Dolar Today</th>
-              <th>Implicito</th>
-              <th>Dicon</th>
-              <th>Dolar Bitcoin</th>
-              <th>Dipro</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className='row'>
-              <td>BsF. {payload.USD.transferencia} </td>
-              <td>BsF. {payload.USD.efectivo} </td>
-              <td>BsF. {payload.USD.promedio_real} </td>
-              <td>BsF. {payload.USD.bitcoin_ref} </td>
-              <td>BsF. {payload.USD.cencoex} </td>
-            </tr>
-          </tbody>
-        </table>
+        (data)?
+        <div>
+          <table className='table'>
+            <thead>
+              <tr className='row header blue'>
+                <th>Dolar Today</th>
+                <th>Implicito</th>
+                <th>Dicon</th>
+                <th>Dolar Bitcoin</th>
+                <th>Dipro</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className='row'>
+                <td>BsF. {data.payload.USD.transferencia } </td>
+                <td>BsF. {data.payload.USD.efectivo} </td>
+                <td>BsF. {data.payload.USD.promedio_real} </td>
+                <td>BsF. {data.payload.USD.bitcoin_ref} </td>
+                <td>BsF. {data.payload.USD.cencoex} </td>
+              </tr>
+            </tbody>
+          </table>
+          <select>
+            <option value="usd">Dolar</option>
+            <option value="bs">Bolivar</option>
+          </select>
+          <input type="text" name="fname" value={this.state.dolar} onChange={this.cambiarMoneda}/> <br />
+          <br />
+          <select>
+            <option value="bs">Bolivar</option>
+            <option value="usd">Dolar</option>
+          </select>
+          <span> {this.state.bolivar} </span> <br />
+        </div>
+
         : null
         }
       </div>

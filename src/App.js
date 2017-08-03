@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Counter from './components/CounterContainer';
 import CurrencyView from './components/CurrencyView';
+import { connect } from 'react-redux';
+import { requestExchangeCurrency } from './redux/actions/ExchangeCurrencyActions';
+import { bindActionCreators } from 'redux';
 
 class App extends Component {
   constructor(){
@@ -8,7 +10,15 @@ class App extends Component {
   this.state = {
     data: null,
   }
-   this.fetchData();
+   //this.fetchData();
+}
+
+static defaultProps = {
+  data2: null,
+}
+
+componentDidMount(){
+  this.props.requestExchangeCurrency();
 }
 
 fetchData () {
@@ -19,7 +29,7 @@ fetchData () {
   .then(function (json) {
     let result =  json.replace('var dolartoday =','');
     let parsedResult = JSON.parse(result);
-    console.log('parsedResult', parsedResult);
+    console.log('fetchResult', parsedResult);
     this.setState({ data: parsedResult });
   }.bind(this))
 .catch(function (ex) {
@@ -29,12 +39,27 @@ fetchData () {
 
   render() {
     const { data } = this.state;
+    const { data2 } = this.props;
+
     return (
       <div className="App">
-        <CurrencyView className="App" payload={data}/>
+        <CurrencyView className="App" data={data2}/>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps({exchangeCurrencyData}) {
+  console.log('state', exchangeCurrencyData)
+  return {
+    data2: exchangeCurrencyData,
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    requestExchangeCurrency: requestExchangeCurrency,
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

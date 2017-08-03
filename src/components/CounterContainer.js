@@ -1,4 +1,4 @@
-import Counter from './Counter';
+/*import Counter from './Counter';
 import { connect } from 'react-redux';
 import { requestInstruments, recieveInstruments } from '../redux/actions/InstrumentsAction';
 import { bindActionCreators } from 'redux';
@@ -17,3 +17,4 @@ function mapDispatchToProps(dispatch) {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+*/

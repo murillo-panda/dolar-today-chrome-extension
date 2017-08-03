@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import InstrumentsReducer from './InstrumentsReducer';
+import ExchangeCurrencyReducer from './ExchangeCurrencyReducer';
 
 export default combineReducers({
-  instruments: InstrumentsReducer,
+  exchangeCurrencyData: ExchangeCurrencyReducer,
 });
