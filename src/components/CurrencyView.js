@@ -1,6 +1,7 @@
 import React, { Component,PropTypes } from 'react';
 
 export default class CurrencyView extends Component {
+  
   static propTypes = {
     data: PropTypes.object,
   };
@@ -8,7 +9,8 @@ export default class CurrencyView extends Component {
   super()
   this.state = {
     dolar: 0,
-    bolivar: 0
+    bolivar: 0,
+    dolarArgentina: 18
   }
    //this.fetchData();
   }
@@ -21,8 +23,17 @@ export default class CurrencyView extends Component {
 
   }
 
+  calcularPesosArgentinos = () => {
+    return this.formatMoney(this.state.dolarArgentina * this.state.dolar);
+  }
+
+  formatMoney = (money) => {
+    return money.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+  }
+
   render() {
     const {data} = this.props;
+  
     return (
       <div>
         {
@@ -31,34 +42,26 @@ export default class CurrencyView extends Component {
           <table className='table'>
             <thead>
               <tr className='row header blue'>
-                <th>Dolar Today</th>
-                <th>Implicito</th>
-                <th>Dicon</th>
-                <th>Dolar Bitcoin</th>
-                <th>Dipro</th>
+                <th>Dolar Today Venezuela</th>
               </tr>
             </thead>
             <tbody>
               <tr className='row'>
                 <td>BsF. {data.payload.USD.transferencia } </td>
-                <td>BsF. {data.payload.USD.efectivo} </td>
-                <td>BsF. {data.payload.USD.promedio_real} </td>
-                <td>BsF. {data.payload.USD.bitcoin_ref} </td>
-                <td>BsF. {data.payload.USD.cencoex} </td>
               </tr>
             </tbody>
           </table>
-          <select>
-            <option value="usd">Dolar</option>
-            <option value="bs">Bolivar</option>
-          </select>
-          <input type="text" name="fname" value={this.state.dolar} onChange={this.cambiarMoneda}/> <br />
+         <span><b>Dolar: </b></span>
+         <br/>
+          <input type="text" name="fname" value={this.state.dolar} onChange={this.cambiarMoneda}/>
           <br />
-          <select>
-            <option value="bs">Bolivar</option>
-            <option value="usd">Dolar</option>
-          </select>
-          <span> {this.state.bolivar} </span> <br />
+         <span><b>Bolivares: </b></span>
+         <br/>
+         <input type="text" name="fname" value={this.formatMoney(this.state.bolivar)} onChange={this.cambiarBolivares}/>
+         <br/>
+         <span><b>Pesos Argentinos: </b></span>
+         <br/>
+         <input type="text" name="fname" value={this.calcularPesosArgentinos()}/>
         </div>
 
         : null
