@@ -12,7 +12,6 @@ export default class CurrencyView extends Component {
     bolivar: 0,
     dolarArgentina: 18
   }
-   //this.fetchData();
   }
   cambiarMoneda = (event) => {
     const {transferencia} = this.props.data.payload.USD;
@@ -47,7 +46,7 @@ export default class CurrencyView extends Component {
             </thead>
             <tbody>
               <tr className='row'>
-                <td>BsF. {data.payload.USD.transferencia } </td>
+                <td>BsF. {this.formatMoney(data.payload.USD.transferencia)} </td>
               </tr>
             </tbody>
           </table>
