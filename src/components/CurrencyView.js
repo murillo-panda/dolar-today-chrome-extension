@@ -4,14 +4,20 @@ export default class CurrencyView extends Component {
   static propTypes = {
     data: PropTypes.object,
   };
+  
   constructor(){
-  super()
-  this.state = {
-    dolar: 0,
-    bolivar: 0
+    super()
+    this.state = {
+      dolar: 0,
+      bolivar: 0
+    }
+    this.formatMoney = this.formatMoney.bind(this);
   }
-   //this.fetchData();
+
+  formatMoney(money) {
+    return new Intl.NumberFormat("de-DE").format(money)
   }
+
   cambiarMoneda = (event) => {
     const {transferencia} = this.props.data.payload.USD;
     this.setState({
@@ -40,11 +46,11 @@ export default class CurrencyView extends Component {
             </thead>
             <tbody>
               <tr className='row'>
-                <td>BsF. {data.payload.USD.transferencia } </td>
-                <td>BsF. {data.payload.USD.efectivo} </td>
-                <td>BsF. {data.payload.USD.promedio_real} </td>
-                <td>BsF. {data.payload.USD.bitcoin_ref} </td>
-                <td>BsF. {data.payload.USD.cencoex} </td>
+                <td>BsF. {this.formatMoney(data.payload.USD.transferencia) } </td>
+                <td>BsF. {this.formatMoney(data.payload.USD.efectivo)} </td>
+                <td>BsF. {this.formatMoney(data.payload.USD.promedio_real)} </td>
+                <td>BsF. {this.formatMoney(data.payload.USD.bitcoin_ref)} </td>
+                <td>BsF. {this.formatMoney(data.payload.USD.cencoex)} </td>
               </tr>
             </tbody>
           </table>
@@ -60,7 +66,6 @@ export default class CurrencyView extends Component {
           </select>
           <span> {this.state.bolivar} </span> <br />
         </div>
-
         : null
         }
       </div>
